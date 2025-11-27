@@ -1,0 +1,41 @@
+--- Python Basics ---
+
+pycache/
+*.py[cod]
+*$py.class
+*.so
+
+--- Virtual Environment ---
+
+.venv/
+venv/
+env/
+
+--- Environment Variables (CRITICAL: Contains API Keys) ---
+
+.env
+
+--- Local Vector Database (Data Persistence) ---
+
+We don't want to push the actual vector data to GitHub
+
+local_qdrant_*/
+qdrant_storage/
+data/
+
+--- IDE Settings ---
+
+.vscode/
+.idea/
+.git/
+
+--- Testing/Logs ---
+
+.pytest_cache/
+*.log
+
+--- Large Model Files (If downloaded locally) ---
+
+*.bin
+*.pth
+*.gguf
