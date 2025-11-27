@@ -1,6 +1,6 @@
 --- Python Basics ---
 
-pycache/
+*pycache*/
 *.py[cod]
 *$py.class
 *.so
