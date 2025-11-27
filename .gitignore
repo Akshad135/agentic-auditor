@@ -20,8 +20,7 @@ env/
 We don't want to push the actual vector data to GitHub
 
 local_qdrant_*/
-qdrant_storage/
-data/
+qdrant_db/
 
 --- IDE Settings ---
 

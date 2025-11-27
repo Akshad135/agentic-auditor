@@ -8,7 +8,7 @@ VECTOR_DB_PATH = DATA_DIR / "qdrant_db"
 
 # Model Settings
 EMBEDDING_MODEL = "nomic-ai/nomic-embed-text-v1.5"
-LLM_MODEL = "llama-3.3-70b-versatile"
+LLM_MODEL = "openai/gpt-oss-120b"
 
 # Vector Store Settings
 COLLECTION_NAME = "legal_playbook"
