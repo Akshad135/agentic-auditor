@@ -1,0 +1,212 @@
+[
+  {
+    "policy_name": "Prohibit Implicit Consent by Use",
+    "category": "Choice of Law / Jurisdiction",
+    "text": "The Company shall not include any clause that deems a user's continued access, installation, or use of the service as automatic acceptance of the agreement, choice of law, or jurisdiction provisions; all such consents must be obtained through a clear, affirmative, and separate action by the user."
+  },
+  {
+    "policy_name": "Require Explicit Choice of Law and Jurisdiction Consent",
+    "category": "Choice of Law / Jurisdiction",
+    "text": "Any choice of law or jurisdiction provision must be presented in plain language, require an explicit opt-in from the user, and disclose the governing law and forum in a manner that is understandable to a reasonable consumer before the contract becomes binding."
+  },
+  {
+    "policy_name": "Mandate Advance Notice and Reasonable Time for Contract Changes",
+    "category": "Choice of Law / Jurisdiction",
+    "text": "The Company shall provide users with at least thirty (30) days written notice of any amendment to choice of law, jurisdiction, or related terms, and must obtain renewed explicit consent; continued use without such consent shall not constitute acceptance."
+  },
+  {
+    "policy_name": "Separate Disclosure of Third-Party Terms",
+    "category": "Choice of Law / Jurisdiction",
+    "text": "When third-party services are offered, the Company must present the third-party terms and privacy policies as a distinct, optional agreement, requiring the user's separate acknowledgment; such terms may not be automatically incorporated by reference."
+  },
+  {
+    "policy_name": "Prohibit Unilateral Transfer of Data Across Borders without Consent",
+    "category": "Choice of Law / Jurisdiction",
+    "text": "Any transfer of personal data to jurisdictions outside the European Economic Area or the United States must be disclosed in a dedicated clause and require the user's explicit, informed consent prior to the transfer."
+  },
+  {
+    "policy_name": "Prohibition of Unilateral Price Changes Without Adequate Notice",
+    "category": "Content Removal",
+    "text": "The Company shall not change any fees, pricing, or subscription terms without providing users with at least thirty (30) days written notice via the user's registered email address and a conspicuous notice on the service platform."
+  },
+  {
+    "policy_name": "Requirement for Advance Notice of Material Agreement Modifications",
+    "category": "Content Removal",
+    "text": "Any amendment to the user agreement that materially affects user rights or obligations must be communicated to users at least sixty (60) days prior to the effective date, and users must be given a clear opportunity to review and accept the revised terms before continued use."
+  },
+  {
+    "policy_name": "Limitation on Service Discontinuation or Suspension",
+    "category": "Content Removal",
+    "text": "The Company may suspend or discontinue a service only for legitimate operational reasons and must provide users with a minimum of fourteen (14) days notice, except where immediate suspension is required to protect safety or legal compliance."
+  },
+  {
+    "policy_name": "Transparency Obligation for Policy Updates",
+    "category": "Content Removal",
+    "text": "All updates to terms, policies, or pricing must be posted in a dedicated, easily accessible section of the website, with a summary of changes highlighted, and must not be hidden within unrelated communications."
+  },
+  {
+    "policy_name": "User Consent Requirement for New or Additional Terms",
+    "category": "Content Removal",
+    "text": "Any new or additional terms that extend beyond the scope of the original agreement shall require explicit, affirmative consent from the user, not merely continued use of the service."
+  },
+  {
+    "policy_name": "No Unilateral Termination Without Just Cause",
+    "category": "Contract Termination",
+    "text": "The company shall not include any clause that allows it to suspend, cancel, or terminate a user's account or access to services at its sole discretion, without specifying a clear, objective, and reasonable cause."
+  },
+  {
+    "policy_name": "Mandatory Notice and Opportunity to Cure",
+    "category": "Contract Termination",
+    "text": "Any termination or suspension must be preceded by a written notice specifying the alleged breach, a reasonable cure period (minimum 30 days), and a clear description of the consequences of non-compliance."
+  },
+  {
+    "policy_name": "Limited Scope of Content Removal",
+    "category": "Contract Termination",
+    "text": "Content may be removed only for a narrowly defined set of violations (e.g., illegal activity, copyright infringement, or breach of explicit community standards) and must be accompanied by a detailed explanation and an appeal process."
+  },
+  {
+    "policy_name": "Prohibition of Blanket Discretionary Rights",
+    "category": "Contract Termination",
+    "text": "The agreement shall not grant the company a blanket right to \"reserve the right at any time\" to suspend or terminate services for any reason, including vague terms such as \"in our sole discretion\" or \"to protect the service.\""
+  },
+  {
+    "policy_name": "Transparency of Termination Grounds",
+    "category": "Contract Termination",
+    "text": "All grounds for termination must be enumerated in the contract in plain language; vague or catch-all language that allows termination for \"any reason\" or \"no reason at all\" is prohibited."
+  },
+  {
+    "policy_name": "Retention of User Assets",
+    "category": "Contract Termination",
+    "text": "If termination is justified, the company must provide a mechanism for the user to retrieve any remaining virtual assets, data, or content within a reasonable timeframe (no less than 60 days) before deletion."
+  },
+  {
+    "policy_name": "No Penalties for Inactivity Alone",
+    "category": "Contract Termination",
+    "text": "Account inactivity shall not be used as a sole basis for termination unless the inactivity period and consequences are clearly disclosed, reasonable, and accompanied by prior notice."
+  },
+  {
+    "policy_name": "Right to Appeal and Independent Review",
+    "category": "Contract Termination",
+    "text": "Users must be granted a formal appeal right to an independent review body or designated internal team, with a response deadline of no more than 15 business days."
+  },
+  {
+    "policy_name": "No Liability Waiver for Termination Actions",
+    "category": "Contract Termination",
+    "text": "The contract must not contain language that absolves the company of liability for wrongful termination, including clauses stating the company is \"not liable\" for any termination actions."
+  },
+  {
+    "policy_name": "Compliance with Applicable Law",
+    "category": "Contract Termination",
+    "text": "All termination provisions must comply with consumer protection statutes and unfair contract term regulations in the jurisdictions where the service is offered."
+  },
+  {
+    "policy_name": "Prohibition of Unilateral Service Modifications",
+    "category": "Unilateral Change",
+    "text": "The Company shall not unilaterally modify, suspend, limit, or terminate any user's access to the service or any portion thereof without the prior written consent of the affected user, except where required by law."
+  },
+  {
+    "policy_name": "Mandatory Notice Period for Changes",
+    "category": "Unilateral Change",
+    "text": "Any intended change to service terms, features, or access rights must be communicated to users in writing at least thirty (30) days before the effective date, and users must be afforded a reasonable opportunity to accept, reject, or negotiate the change."
+  },
+  {
+    "policy_name": "Limited Grounds for Termination",
+    "category": "Unilateral Change",
+    "text": "Termination or suspension of a user's account may only occur for specific, clearly defined breaches of the agreement, and must be preceded by a written notice describing the breach, a cure period of at least fourteen (14) days, and an opportunity for the user to contest the termination."
+  },
+  {
+    "policy_name": "Prohibition of Arbitrary Transfer Restrictions",
+    "category": "Unilateral Change",
+    "text": "The Company shall not prohibit or void user-initiated transfers of account rights or data unless such transfers are expressly prohibited by applicable law or a mutually agreed amendment to the contract."
+  },
+  {
+    "policy_name": "Liability for Unlawful Interference",
+    "category": "Unilateral Change",
+    "text": "The Company shall be liable for any damages resulting from unlawful interference, restriction, or interruption of the service that is not justified by a legitimate, pre-disclosed security or maintenance reason."
+  },
+  {
+    "policy_name": "No Blanket Liability Exclusion",
+    "category": "Limitation of Liability",
+    "text": "The company shall not include any clause that disclaims all liability for any loss, damage, or injury, whether arising in contract, tort, negligence, strict liability or otherwise, including indirect, consequential, punitive or special damages."
+  },
+  {
+    "policy_name": "Statutory Rights Preservation",
+    "category": "Limitation of Liability",
+    "text": "Any limitation of liability must not affect the company's liability for personal injury, death, fraud, gross negligence, or any rights that cannot be waived under applicable law."
+  },
+  {
+    "policy_name": "Reasonable Liability Cap",
+    "category": "Limitation of Liability",
+    "text": "Liability may be limited only to direct damages and capped at an amount not exceeding the fees paid by the customer in the twelve months preceding the claim, unless a higher cap is expressly agreed in writing."
+  },
+  {
+    "policy_name": "Service Modification Notice Requirement",
+    "category": "Limitation of Liability",
+    "text": "The company must provide at least thirty (30) days written notice before any material change, suspension or discontinuation of services, and remain liable for any damages caused by unannounced changes."
+  },
+  {
+    "policy_name": "Third-Party Content Responsibility",
+    "category": "Limitation of Liability",
+    "text": "The company shall retain responsibility for content it hosts or distributes and may not disclaim liability for third-party content that infringes rights or causes harm, except to the extent permitted by law."
+  },
+  {
+    "policy_name": "Prohibit Mandatory Arbitration",
+    "category": "Exclusion of Liability",
+    "text": "The company shall not include any clause that requires users to resolve disputes through mandatory binding arbitration; all dispute resolution mechanisms must be voluntary and not preclude judicial proceedings."
+  },
+  {
+    "policy_name": "Ban Class Action Waivers",
+    "category": "Exclusion of Liability",
+    "text": "The company shall not contain any provision that waives or limits a user's right to participate in class actions, collective arbitrations, or representative lawsuits."
+  },
+  {
+    "policy_name": "Preserve Right to Court and Jury",
+    "category": "Exclusion of Liability",
+    "text": "All agreements must preserve the user's right to bring claims before a court of competent jurisdiction and to a trial by judge or jury; no clause may require a waiver of these rights."
+  },
+  {
+    "policy_name": "Statutory Claims Exemption",
+    "category": "Exclusion of Liability",
+    "text": "Any arbitration clause, if ever used, must expressly exempt statutory consumer protection claims, privacy rights, and any other rights that law deems non-arbitrable; attempts to override such exemptions render the clause unenforceable."
+  },
+  {
+    "policy_name": "Require Clear Opt-Out Mechanism",
+    "category": "Exclusion of Liability",
+    "text": "If an arbitration provision is offered, the company must provide a clear, conspicuous, and unconditional opt-out option that does not require the user to waive any rights, and the opt-out must be effective before any arbitration agreement becomes binding."
+  },
+  {
+    "policy_name": "Prohibition of Unilateral Jurisdiction Clauses",
+    "category": "Unilateral Termination",
+    "text": "The company shall not include any clause that unilaterally imposes exclusive jurisdiction, venue, or forum selection on the counter-party without offering a genuine, negotiated choice of law and forum that is reasonable, neutral, and not limited to a single jurisdiction unless expressly agreed by both parties in writing."
+  },
+  {
+    "policy_name": "Balanced Dispute-Resolution Requirement",
+    "category": "Unilateral Termination",
+    "text": "All dispute-resolution provisions must provide the counter-party with at least two reasonable options (e.g., arbitration in a neutral location, litigation in the counter-party's principal place of business, or a mutually agreed court). The company must disclose these options clearly, allow the counter-party to select their preferred method, and cannot condition service access on acceptance of a single, pre-selected jurisdiction."
+  },
+  {
+    "policy_name": "Notice and Opt-Out Mechanism for Arbitration",
+    "category": "Unilateral Termination",
+    "text": "If arbitration is offered, the company must provide a clear, conspicuous notice of the arbitration option, a minimum 30-day period for the counter-party to opt out, and a simple, no-cost mechanism to exercise the opt-out. Failure to opt out shall not be construed as consent to exclusive jurisdiction in any specific court."
+  },
+  {
+    "policy_name": "Compliance with Applicable Consumer Protection Laws",
+    "category": "Unilateral Termination",
+    "text": "All jurisdiction and venue clauses must be reviewed and approved by legal counsel to ensure they do not violate consumer protection statutes, unfair contract term regulations, or mandatory jurisdiction provisions in the jurisdictions where the counter-party resides."
+  },
+  {
+    "policy_name": "Documentation and Transparency Standard",
+    "category": "Unilateral Termination",
+    "text": "Any clause that affects jurisdiction, venue, or dispute-resolution must be presented in plain language, highlighted in the agreement, and accompanied by a summary explaining the rights of the counter-party, including their ability to seek relief in their local courts."
+  },
+  {
+    "policy_name": "Prohibit Choice-of-Law Clauses That Exclude Conflict-of-Law Principles",
+    "category": "Arbitration",
+    "text": "The company shall not include any provision that designates a governing law while expressly excluding that jurisdiction's conflict-of-law rules, nor shall it attempt to override mandatory consumer-protective statutes by stating the law applies \"without regard to its conflict-of-law provisions.\""
+  },
+  {
+    "policy_name": "Prohibit Mandatory Forum-Selection or Exclusive Venue Clauses",
+    "category": "Arbitration",
+    "text": "The company shall not require users to submit to exclusive jurisdiction in a specific court, state, or foreign venue, nor shall it limit dispute resolution to a single location without the user's informed, affirmative consent. Any permissible jurisdictional limitation must be optional, clearly disclosed, and accompanied by a reasonable opt-out mechanism and notice period."
+  }
+]
