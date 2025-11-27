@@ -1,0 +1,46 @@
+--- INSTALLATION INSTRUCTIONS ---
+"""
+1. Run standard install:
+
+pip install -r requirements.txt
+
+2. FIX CUDA SUPPORT (CRITICAL):
+
+The 'unstructured' library often forces a CPU-only version of PyTorch.
+
+Run this command AFTER step 1 to restore GPU support for your RTX 4060:
+
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 --force-
+"""
+
+--- Orchestration & Logic ---
+
+langchain
+langchain-groq
+langchain-community
+langchain-huggingface
+langchain-qdrant
+langgraph
+python-dotenv
+pydantic
+
+--- Database & Embeddings ---
+
+qdrant-client
+sentence-transformers
+einops
+
+numpy<2.3.0
+
+--- Ingestion ---
+
+unstructured[pdf]
+pdf2image
+
+nltk
+protobuf
+
+--- Interface ---
+
+streamlit
+watchdog
