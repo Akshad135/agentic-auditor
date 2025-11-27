@@ -6,6 +6,7 @@ from src.agents.state import AgentGraphState
 from src.database.vector_store import retrieve_relevant_rules
 from src.config import GROQ_API_KEY, LLM_MODEL
 
+# Initialize LLM with JSON Mode forced
 llm = ChatGroq(
     temperature=0.1,
     model_name=LLM_MODEL,
@@ -13,9 +14,8 @@ llm = ChatGroq(
     model_kwargs={"response_format": {"type": "json_object"}},
 )
 
-
 def drafter_node(state: AgentGraphState) -> AgentGraphState:
-    print("--- Drafter agent (JSON mode) ---")
+    print("--- 🕵️‍♂️ DRAFTER AGENT (JSON MODE) ---")
     section_text = state["section_text"]
     iteration = state.get("iteration_count", 0)
     feedback = state.get("critique_feedback")
@@ -39,7 +39,7 @@ def drafter_node(state: AgentGraphState) -> AgentGraphState:
 
     # Add critic feedback on retries
     if feedback:
-        print(f"Detected feedback: {feedback[:50]}...")
+        print(f"   🔄 DETECTED FEEDBACK: {feedback[:50]}...")
         human_msg += (
             "\n\nIMPORTANT: Your previous analysis was rejected.\n"
             f"Critic feedback: {feedback}\n\n"
@@ -60,21 +60,23 @@ def drafter_node(state: AgentGraphState) -> AgentGraphState:
     try:
         data = json.loads(response.content)
         risk_text = data.get("risk_assessment", "Analysis failed.")
+        risk_found = data.get("risk_found", False)
     except json.JSONDecodeError:
-        print("JSON parsing failed. Raw output:", response.content)
+        print("❌ JSON parsing failed. Raw output:", response.content)
         risk_text = "Error parsing model output."
+        risk_found = False
 
-    print(f"Draft assessment: {risk_text[:50]}...")
+    print(f"   📝 Draft assessment: {risk_text[:50]}...")
 
     return {
         "risk_assessment": risk_text,
         "relevant_rules": relevant_rules,
         "iteration_count": iteration + 1,
+        "risk_found": risk_found
     }
 
-
 def critic_node(state: AgentGraphState) -> AgentGraphState:
-    print("--- Critic agent (JSON mode) ---")
+    print("--- ⚖️ CRITIC AGENT (JSON MODE) ---")
     section_text = state["section_text"]
     draft = state["risk_assessment"]
     rules = state["relevant_rules"]
@@ -112,13 +114,13 @@ def critic_node(state: AgentGraphState) -> AgentGraphState:
         status = data.get("status", "REJECTED").upper()
         feedback = data.get("feedback", "No feedback provided.")
     except json.JSONDecodeError:
-        print("JSON parsing failed.")
+        print("❌ JSON parsing failed.")
         status = "REJECTED"
         feedback = "JSON error."
 
     is_satisfactory = status == "APPROVED"
 
-    print(f"Decision: {status}")
+    print(f"   👩‍⚖️ Decision: {status}")
 
     return {
         "critique_feedback": feedback,

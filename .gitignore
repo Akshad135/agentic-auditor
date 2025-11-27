@@ -21,6 +21,8 @@ We don't want to push the actual vector data to GitHub
 
 local_qdrant_*/
 qdrant_db/
+raw_pdfs/
+audit_reports/
 
 --- IDE Settings ---
 
