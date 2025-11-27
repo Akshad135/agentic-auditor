@@ -1,43 +1,38 @@
 import os
+import json
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from src.agents.state import AgentGraphState
 from src.database.vector_store import retrieve_relevant_rules
 from src.config import GROQ_API_KEY, LLM_MODEL
 
-# Initialize the LLM once
+# Initialize LLM with JSON Mode forced
 llm = ChatGroq(
-    temperature=0.1, # Low temperature for factual legal analysis
+    temperature=0.1,
     model_name=LLM_MODEL,
-    api_key=GROQ_API_KEY
+    api_key=GROQ_API_KEY,
+    model_kwargs={"response_format": {"type": "json_object"}}
 )
 
 def drafter_node(state: AgentGraphState) -> AgentGraphState:
-    """
-    Agent A: The Risk Hunter.
-    1. Looks up policies in Qdrant.
-    2. Drafts a risk assessment.
-    """
-    print("--- 🕵️‍♂️ DRAFTER AGENT WORKING ---")
+    print("--- 🕵️‍♂️ DRAFTER AGENT (JSON MODE) ---")
     section_text = state["section_text"]
     iteration = state.get("iteration_count", 0)
 
-    # 1. RAG: Get the Ground Truth from our Local DB
-    # We use the raw text as the query
+    # 1. RAG Retrieval
     relevant_rules = retrieve_relevant_rules(section_text)
     
-    # 2. The Prompt
-    system_msg = """You are a cynical Legal Auditor AI. 
-    Your goal is to detect risks in contract clauses based STRICTLY on the provided Company Policies.
+    # 2. JSON-Specific Prompt
+    system_msg = """You are a Legal Auditor AI.
+    Compare the Contract Clause against the Company Policies.
     
     Company Policies:
     {rules}
     
-    Instructions:
-    - Compare the 'Clause Under Review' against the 'Company Policies'.
-    - If the clause violates a policy, flag it as HIGH RISK.
-    - If the clause is safe, mark it as LOW RISK.
-    - Cite the specific policy rule you are relying on.
+    Output strictly in Valid JSON format with these keys:
+    - "risk_found": (boolean) True if violated.
+    - "risk_assessment": (string) Brief explanation of the risk.
+    - "cited_policy": (string) The specific policy text used for the finding.
     """
     
     human_msg = f"Clause Under Review:\n{section_text}"
@@ -47,47 +42,41 @@ def drafter_node(state: AgentGraphState) -> AgentGraphState:
         ("human", human_msg)
     ])
 
-    # 3. Invoke LLM
+    # 3. Invoke & Parse
     chain = prompt | llm
     response = chain.invoke({"rules": "\n- ".join(relevant_rules)})
     
-    print(f"   📝 Draft Generated (Length: {len(response.content)})")
+    try:
+        data = json.loads(response.content)
+        risk_text = data.get("risk_assessment", "Analysis failed")
+    except json.JSONDecodeError:
+        print("❌ JSON Parsing Failed. Raw output:", response.content)
+        risk_text = "Error parsing model output."
 
-    # 4. Update State
+    print(f"   📝 Draft: {risk_text[:50]}...")
+
     return {
-        "risk_assessment": response.content,
+        "risk_assessment": risk_text,
         "relevant_rules": relevant_rules,
         "iteration_count": iteration + 1
     }
 
 def critic_node(state: AgentGraphState) -> AgentGraphState:
-    """
-    Agent B: The Senior Partner.
-    1. Reviews the Drafter's work.
-    2. Checks for hallucinations or missed loopholes.
-    """
-    print("--- ⚖️ CRITIC AGENT WORKING ---")
+    print("--- ⚖️ CRITIC AGENT (JSON MODE) ---")
     section_text = state["section_text"]
     draft = state["risk_assessment"]
     rules = state["relevant_rules"]
     
-    # 1. The Prompt
-    system_msg = """You are a Senior Legal Partner. Your job is to grade the work of a Junior Auditor.
+    system_msg = """You are a Senior Legal Partner.
+    Review the Junior Auditor's assessment.
     
-    The Junior Auditor was given this Ground Truth:
-    {rules}
+    Ground Truth: {rules}
+    Clause: {clause}
+    Assessment: {draft}
     
-    And they analyzed this Clause:
-    {clause}
-    
-    Their Analysis:
-    {draft}
-    
-    Your Task:
-    - Did the Junior Auditor hallucinate a rule that doesn't exist?
-    - Did they miss a clear violation mentioned in the Ground Truth?
-    - Reply with 'APPROVED' if the analysis is solid.
-    - Reply with 'REJECTED' followed by your critique if it is flawed.
+    Output strictly in Valid JSON format with these keys:
+    - "status": (string) "APPROVED" or "REJECTED"
+    - "feedback": (string) Explanation of why.
     """
 
     prompt = ChatPromptTemplate.from_messages([
@@ -95,21 +84,27 @@ def critic_node(state: AgentGraphState) -> AgentGraphState:
         ("human", "Grade this analysis.")
     ])
 
-    # 2. Invoke LLM
     chain = prompt | llm
-    # We format the rules into a string list for the prompt
     response = chain.invoke({
         "rules": "\n- ".join(rules),
         "clause": section_text,
         "draft": draft
     })
 
-    content = response.content
-    is_satisfactory = "APPROVED" in content.upper()
+    try:
+        data = json.loads(response.content)
+        status = data.get("status", "REJECTED").upper()
+        feedback = data.get("feedback", "No feedback provided.")
+    except json.JSONDecodeError:
+        print("❌ JSON Parsing Failed.")
+        status = "REJECTED"
+        feedback = "JSON Error."
+
+    is_satisfactory = (status == "APPROVED")
     
-    print(f"   👩‍⚖️ Critique: {'✅ APPROVED' if is_satisfactory else '❌ REJECTED'}")
+    print(f"   👩‍⚖️ Decision: {status}")
 
     return {
-        "critique_feedback": content,
+        "critique_feedback": feedback,
         "is_satisfactory": is_satisfactory
     }
