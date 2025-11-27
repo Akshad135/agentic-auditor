@@ -1,20 +1,21 @@
 from typing import TypedDict, List, Optional
 
+
 class AgentGraphState(TypedDict):
     """
-    Defines the structure of data passed between the Drafter and Critic agents.
-    This acts as the 'Short-Term Memory' of the debate.
+    Shared state passed between drafter and critic nodes.
     """
-    # --- INPUT ---
+
+    # Input
     section_text: str
 
-    # --- DRAFTER OUTPUTS ---
+    # Drafter outputs
     risk_assessment: Optional[str]
     relevant_rules: List[str]
 
-    # --- CRITIC OUTPUTS ---
+    # Critic outputs
     critique_feedback: Optional[str]
     is_satisfactory: bool
 
-    # --- METADATA ---
+    # Metadata
     iteration_count: int

@@ -16,3 +16,6 @@ VECTOR_DIMENSION = 768
 
 # Groq Config
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+# --- OPERATIONAL SETTINGS ---
+MAX_RETRIES = 3 
