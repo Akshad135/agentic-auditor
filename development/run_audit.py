@@ -130,8 +130,8 @@ def main():
     output_filename = f"{INPUT_PDF_PATH.stem}_audit.json"
     output_path = REPORT_DIR / output_filename
 
-    with open(output_path, "w") as f:
-        json.dump(final_report, f, indent=2)
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(final_report, f, indent=2, ensure_ascii=False)
 
     print(f"Audit complete. Risks found: {len(final_report)}")
     print(f"Report saved: {output_path}")

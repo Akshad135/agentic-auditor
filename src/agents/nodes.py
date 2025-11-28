@@ -14,31 +14,35 @@ llm = ChatGroq(
 
 
 def drafter_node(state: AgentGraphState) -> AgentGraphState:
-    print("Drafter agent")
+    iteration = state.get("iteration_count", 0)
+    print(f"\n--- DRAFTER | Iteration {iteration} ---")
 
     section_text = state["section_text"]
-    iteration = state.get("iteration_count", 0)
     feedback = state.get("critique_feedback")
 
     relevant_rules = retrieve_relevant_rules(section_text)
 
     system_msg = """
-You are a legal auditor.
-Compare the clause against company policies.
+                You are a legal auditor.
+                Compare the input clause against the provided company policies.
 
-Company policies:
-{rules}
+                Company policies:
+                {rules}
 
-Output valid JSON with:
-- risk_found (bool)
-- risk_assessment (string)
-- cited_policy (string)
-"""
+                Your response must be a valid JSON object. Do not include any explanation or text outside the JSON.
+
+                Required JSON Structure:
+                {{
+                    "risk_found": boolean,
+                    "risk_assessment": "string (brief explanation)",
+                    "cited_policy": "string (policy name or None)"
+                }}
+                """
 
     human_msg = f"Clause:\n{section_text}"
 
     if feedback:
-        print(f"Feedback received: {feedback[:50]}...")
+        print(f"[DRAFTER] Feedback received: {feedback[:60]}...")
         human_msg += (
             "\n\nPrevious analysis was rejected.\n"
             f"Critic feedback: {feedback}\n"
@@ -60,11 +64,12 @@ Output valid JSON with:
         risk_text = data.get("risk_assessment", "Analysis failed.")
         risk_found = data.get("risk_found", False)
     except json.JSONDecodeError:
-        print("JSON parsing failed")
+        print("[DRAFTER] JSON parsing failed")
         risk_text = "Error parsing model output."
         risk_found = False
 
-    print(f"Draft assessment: {risk_text[:50]}...")
+    print(f"[DRAFTER] Risk found: {risk_found}")
+    print(f"[DRAFTER] Assessment: {risk_text[:120]}...")
 
     return {
         "risk_assessment": risk_text,
@@ -75,26 +80,32 @@ Output valid JSON with:
 
 
 def critic_node(state: AgentGraphState) -> AgentGraphState:
-    print("Critic agent")
+    print("\n--- CRITIC ---")
 
     section_text = state["section_text"]
     draft = state["risk_assessment"]
     rules = state["relevant_rules"]
 
     system_msg = """
-You are a senior legal reviewer.
+                You are a senior legal reviewer.
 
-Policies:
-{rules}
-Clause:
-{clause}
-Assessment:
-{draft}
+                Policies:
+                {rules}
 
-Return JSON with:
-- status ("APPROVED" or "REJECTED")
-- feedback (string)
-"""
+                Clause:
+                {clause}
+
+                Assessment:
+                {draft}
+
+                Your response must be a valid JSON object. Do not include any explanation or text outside the JSON.
+
+                Required JSON Structure:
+                {{
+                    "status": "APPROVED" or "REJECTED",
+                    "feedback": "string (explanation of decision)"
+                }}
+                """
 
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -117,13 +128,14 @@ Return JSON with:
         status = data.get("status", "REJECTED").upper()
         feedback = data.get("feedback", "No feedback provided.")
     except json.JSONDecodeError:
-        print("JSON parsing failed")
+        print("[CRITIC] JSON parsing failed")
         status = "REJECTED"
         feedback = "JSON error."
 
     is_satisfactory = status == "APPROVED"
 
-    print(f"Decision: {status}")
+    print(f"[CRITIC] Decision: {status}")
+    print(f"[CRITIC] Feedback: {feedback[:120]}...")
 
     return {
         "critique_feedback": feedback,

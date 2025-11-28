@@ -1,5 +1,10 @@
 [
   {
+    "policy_name": "Prohibit Unreasonable Restriction Periods",
+    "category": "General Fairness",
+    "text": "The Company shall not enforce any post-termination restriction, non-compete, or data retention period that exceeds two (2) years, as anything beyond this timeframe is deemed unconscionable and an undue burden."
+  },
+  {
     "policy_name": "Prohibit Implicit Consent by Use",
     "category": "Choice of Law / Jurisdiction",
     "text": "The Company shall not include any clause that deems a user's continued access, installation, or use of the service as automatic acceptance of the agreement, choice of law, or jurisdiction provisions; all such consents must be obtained through a clear, affirmative, and separate action by the user."
