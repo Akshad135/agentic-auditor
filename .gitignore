@@ -23,6 +23,7 @@ local_qdrant_*/
 qdrant_db/
 raw_pdfs/
 audit_reports/
+temp_uploads/
 
 --- IDE Settings ---
 
