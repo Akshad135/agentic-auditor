@@ -9,28 +9,24 @@ from langchain_core.prompts import ChatPromptTemplate
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 load_dotenv()
 
-from src.config import GROQ_API_KEY, LLM_MODEL
+from src.config import GROQ_API_KEY, LLM_MODEL, RAW_DATA_CSV, DERIVED_PLAYBOOK_JSON
 from src.utils.text_cleaner import clean_text
-
-DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-INPUT_CSV = DATA_DIR / "real_legal_clauses.csv"
-OUTPUT_PLAYBOOK = DATA_DIR / "derived_playbook.json"
 
 
 def derive_policies():
     print("Starting policy derivation")
 
-    if not INPUT_CSV.exists():
-        print("Input CSV not found")
+    if not RAW_DATA_CSV.exists():
+        print(f"Input CSV not found: {RAW_DATA_CSV}")
         return
 
-    df = pd.read_csv(INPUT_CSV)
+    df = pd.read_csv(RAW_DATA_CSV)
     print(f"Rows loaded: {len(df)}")
 
     df["text"] = df["text"].apply(clean_text)
 
     categories = df["category"].unique()
-    print(f"Categories: {len(categories)} (2 rules each)")
+    print(f"Categories: {len(categories)}")
 
     llm = ChatGroq(
         temperature=0.3,
@@ -56,7 +52,7 @@ def derive_policies():
 You are the General Counsel.
 
 From the provided bad contract clauses, derive two defensive company policies.
-Return only valid JSON in the format:
+Return only valid JSON:
 
 {
   "rules": [
@@ -85,13 +81,11 @@ BAD EXAMPLES:
             response = chain.invoke({})
             data = json.loads(response.content)
 
-            rules = data.get("rules", [])
-
-            for rule in rules:
+            for rule in data.get("rules", []):
                 rule_name = clean_text(rule.get("name", ""))
                 rule_text = clean_text(rule.get("text", ""))
 
-                print(f"  Derived: {rule_name}")
+                print(f"Derived: {rule_name}")
 
                 derived_playbook.append(
                     {
@@ -102,13 +96,13 @@ BAD EXAMPLES:
                 )
 
         except Exception as e:
-            print(f"  Failed for {category}: {e}")
+            print(f"Failed for {category}: {e}")
 
-    with open(OUTPUT_PLAYBOOK, "w") as f:
+    with open(DERIVED_PLAYBOOK_JSON, "w") as f:
         json.dump(derived_playbook, f, indent=2)
 
     print(f"Policies generated: {len(derived_playbook)}")
-    print(f"Saved to: {OUTPUT_PLAYBOOK}")
+    print(f"Saved to: {DERIVED_PLAYBOOK_JSON}")
 
 
 if __name__ == "__main__":
